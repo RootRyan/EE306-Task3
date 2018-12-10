@@ -64,7 +64,19 @@ StartCheck	JSR Pop
 	TRAP x21
 	ADD R5, R5, #1
 	BRnzp Loop
+FirstEnd
+	LD R1, U
+	ADD R1, R1, R0
+	BRnp Loop
+	ADD R4, R4, #1
+	BRnzp Loop
 
+SecondEnd
+	LD R1, A
+	ADD R1, R1, R0
+	BRnp checknext
+	ADD R3, R3, #1
+	BRnzp Loop
 
 
 
