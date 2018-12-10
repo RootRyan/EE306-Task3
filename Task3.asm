@@ -77,7 +77,47 @@ SecondEnd
 	BRnp checknext
 	ADD R3, R3, #1
 	BRnzp Loop
+checknext	LD R1, G
+	ADD R1, R1, R0
+	BRnp reset
+	ADD R2, R2, #1
+	BRnzp Loop
+reset	AND R4, R4, #0
+	BRnzp FirstEnd
 
+CheckA
+	LD R1, A
+	ADD R1, R1, R0
+	BRnp reset1
+	AND R2, R2, #0
+	AND R3, R3, #0
+	AND R4, R4, #0
+	AND R5, R5, #0
+	TRAP x25
+reset1	AND R4, R4, #0
+	AND R2, R2, #0
+	BRnzp FirstEnd
+
+CheckAG
+	LD R1, A
+	ADD R1, R1, R0
+	BRnp checknext1
+	AND R2, R2, #0
+	AND R3, R3, #0
+	AND R4, R4, #0
+	AND R5, R5, #0
+	TRAP x25
+checknext1	LD R1, G
+	ADD R1, R1, R0
+	BRnp reset2
+	AND R2, R2, #0
+	AND R3, R3, #0
+	AND R4, R4, #0
+	AND R5, R5, #0
+	TRAP x25
+reset2	AND R4, R4, #0
+	AND R3, R3, #0
+	BRnzp FirstEnd
 
 
 
