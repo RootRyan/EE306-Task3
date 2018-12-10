@@ -1,6 +1,5 @@
-; ISR.asm
-; Name: Ryan Root
-; UTEid: rmr3494
+; Task3-InterruptSubroutine.asm
+; Names: Ryan Root and Ben Kim
 ; Keyboard ISR runs when a key is struck
 ; Checks for a valid RNA symbol and places it at x4600
 
