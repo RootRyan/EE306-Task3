@@ -15,7 +15,23 @@
 	AND R4, R4, #0
 	AND R3, R3, #0
 	AND R2, R2, #0
-
-Loop	BRnzp Loop
-
+; Start of Actual Program
+Loop	LDI R0, Buffer
+	BRz Loop
+	TRAP x21
+	AND R1, R1, #0
+	STI R1, Buffer
+	AND R2, R2, #1
+	BRp CheckA
+	AND R3, R3, #1
+	BRp CheckAG
+	AND R4, R4, #1
+	BRp SecondEnd
+	AND R5, R5, #1
+	BRp FirstEnd
+	LD R1, G
+	ADD R1, R1, R0
+	BRz StartCheck
+	JSR Push
+	BRnzp Loop
 .END
