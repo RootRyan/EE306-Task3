@@ -34,4 +34,68 @@ Loop	LDI R0, Buffer
 	BRz StartCheck
 	JSR Push
 	BRnzp Loop
+Loop	LDI R0, Buffer
+	BRz Loop
+	TRAP x21
+	AND R1, R1, #0
+	STI R1, Buffer
+	AND R2, R2, #1
+	BRp CheckA
+	AND R3, R3, #1
+	BRp CheckAG
+	AND R4, R4, #1
+	BRp SecondEnd
+	AND R5, R5, #1
+	BRp FirstEnd
+	LD R1, G
+	ADD R1, R1, R0
+	BRz StartCheck
+	JSR Push
+	BRnzp Loop
+StartCheck	JSR Pop
+	LD R1, U
+	ADD R1, R1, R0
+	BRnp Loop
+	JSR Pop
+	LD R1, A
+	ADD R1, R1, R0
+	BRnp Loop
+	LD R0, Pipe
+	TRAP x21
+	ADD R5, R5, #1
+	BRnzp Loop
+
+
+
+
+
+
+
+; Symbol Initiations
+      Buffer .FILL x4600
+ Stack_Start .FILL x4000
+    ISR_Addr .FILL x2600
+IntEnableBit .FILL x4000
+IntVectTable .FILL x0180
+	KBSR .FILL xFE00
+	KBDR .FILL XFE02
+	   A .FILL #-65
+	   C .FILL #-67
+	   U .FILL #-85
+	   G .FILL #-71
+	Pipe .FILL x7C
+
+
+;STACK SUBROUTINES
+;Push
+Push
+	ADD R6, R6, #-1
+	STR R0, R6, 0
+	RET
+
+;Pop
+Pop
+	LDR R0, R6, 0
+	ADD R6, R6, #1
+	RET
 .END
